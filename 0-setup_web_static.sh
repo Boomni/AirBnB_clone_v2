@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-"""Sets up my web servers for the deployment of web_static"""
+#Sets up my web servers for the deployment of web_static
 
 if [ ! -x "$(command -v nginx)" ]; then
 	sudo apt-get update
@@ -10,7 +10,6 @@ sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/current/
 
-# Create a fake HTML file to test Nginx configuration
 sudo echo "
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,7 @@ sudo echo "
 	</body>
 </html>" | sudo tee /data/web_static/releases/test/index.html
 
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/index.html /data/web_static/current
 
 sudo chown -R ubuntu:ubuntu /data/
 
