@@ -11,14 +11,14 @@ sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/current/
 
 sudo echo "
-<!DOCTYPE html>
 <html>
-	<head>
-	</head>
-	<body>
-	Holberton School
-	</body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>
+" | sudo tee /data/web_static/releases/test/index.html
 
 sudo ln -sf /data/web_static/releases/test/index.html /data/web_static/current
 
