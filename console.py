@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models import storage_type
 
 
 class HBNBCommand(cmd.Cmd):
@@ -137,16 +138,28 @@ class HBNBCommand(cmd.Cmd):
                 kwargs[key] = value
             except ValueError:
                 pass
-        if not kwargs:
+        if storage_type == 'db':
             instance = self.classes[args[0]]()
+            for key, value in kwargs.items():
+                setattr(instance, key, value)
             instance.save()
             print(instance.id)
-            return
-        instance = self.classes[args[0]]()
-        for key, value in kwargs.items():
-            setattr(instance, key, value)
-        instance.save()
-        print(instance.id)
+        else:
+            if not kwargs:
+                instance = self.classes[args[0]]()
+                instance.save()
+                print(instance.id)
+                return
+            instance = self.classes[args[0]]()
+            for key, value in kwargs.items():
+                setattr(instance, key, value)
+            instance.save()
+            print(instance.id)
+#        instance = self.classes[args[0]]()
+#        for key, value in kwargs.items():
+#            setattr(instance, key, value)
+#        instance.save()
+#        print(instance.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -177,7 +190,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage._FileStorage__objects[key])
+            print(storage.all()[key])
         except KeyError:
             print("** no instance found **")
 
@@ -228,11 +241,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
