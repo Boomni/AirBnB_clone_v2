@@ -6,8 +6,7 @@ if [ ! -x "$(command -v nginx)" ]; then
 	sudo apt-get -y install nginx
 fi
 
-sudo mkdir -p /data/web_static/releases/test/
-sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/ /data/web_static/shared/
 
 if [ -d "/data/web_static/current" ]; then
     sudo rm -rf /data/web_static/current;
@@ -23,7 +22,7 @@ sudo echo "
 </html>
 " | sudo tee /data/web_static/releases/test/index.html
 
-sudo ln -sf /data/web_static/releases/test/index.html /data/web_static/current
+sudo ln -sf /data/web_static/releases/test /data/web_static/current
 
 sudo chown -hR ubuntu:ubuntu /data/
 
