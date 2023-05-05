@@ -13,8 +13,6 @@ if [ -d "/data/web_static/current" ]; then
     sudo rm -rf /data/web_static/current;
 fi
 
-sudo mkdir -p /data/web_static/current/
-
 sudo echo "
 <html>
   <head>
