@@ -1,43 +1,53 @@
 #!/usr/bin/python3
 """
-Fabric script to deploy tgz archive
+Distributes achives to my web browser
 """
-from os.path import exists
-from fabric.api import put, run, env
+import os
+from fabric.api import env, put, run
 
 env.hosts = ['54.237.112.44', '35.175.63.68']
 
 
 def do_deploy(archive_path):
     """
-    copies archive file from local to my webservers
+    Deploys the archive to the web servers
     """
-
-    if not exists(archive_path):
+    if not os.path.exists(archive_path):
         return False
+
     try:
-        file_name = archive_path.split("/")[-1].split(".")[0]
+        # Upload archive to /tmp/ directory of web server
         put(archive_path, "/tmp/")
 
-        run("mkdir -p /data/web_static/releases/{}".format(file_name))
+        # Get filename without extension
+        filename = os.path.basename(archive_path).split(".")[0]
 
+        # Create directory for new version
+        run("mkdir -p /data/web_static/releases/{}/".format(filename))
+
+        # Uncompress archive into new directory
         run("tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/"
-            .format(file_name, file_name))
+            .format(filename, filename))
 
-        run('rm -rf /tmp/{}.tgz'.format(file_name))
+        # Delete archive from web server
+        run("rm /tmp/{}.tgz".format(filename))
 
-        run(('mv /data/web_static/releases/{}/web_static/* ' +
-            '/data/web_static/releases/{}/')
-            .format(file_name, file_name))
+        # Move files out of subdirectory
+        run("mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}/".format(filename, filename))
 
-        run('rm -rf /data/web_static/releases/{}/web_static'
-            .format(file_name))
+        # Remove empty directory
+        run("rm -rf /data/web_static/releases/{}/web_static"
+            .format(filename))
 
-        run('rm -rf /data/web_static/current')
+        # Remove symbolic link
+        run("rm -rf /data/web_static/current")
 
-        run(('ln -s /data/web_static/releases/{}/' +
-            ' /data/web_static/current')
-            .format(file_name))
+        # Create new symbolic link
+        run("ln -s /data/web_static/releases/{}/ \
+            /data/web_static/current".format(filename))
+
         return True
-    except Exception:
+
+    except:
         return False
