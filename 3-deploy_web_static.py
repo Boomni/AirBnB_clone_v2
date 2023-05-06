@@ -10,6 +10,7 @@ env.hosts = ['54.237.112.44', '35.175.63.68']
 env.user = 'ubuntu'
 env.key_filename = '~/.ssh/school'
 
+
 def do_pack():
     """Create a compressed archive of your web_static directory"""
     local("mkdir -p versions")
@@ -19,6 +20,7 @@ def do_pack():
     command = "tar -cvzf {} web_static".format(archive_path)
     if local(command).succeeded:
         return archive_path
+
 
 def do_deploy(archive_path):
     """Distributes an archive to your web servers"""
@@ -39,6 +41,7 @@ def do_deploy(archive_path):
     run("ln -s {} /data/web_static/current".format(path))
     print("New version deployed!")
     return True
+
 
 def deploy():
     """Calls the do_pack and do_deploy functions"""
