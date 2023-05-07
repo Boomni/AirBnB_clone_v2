@@ -19,13 +19,14 @@ def do_deploy(archive_path):
     if not exists(archive_path):
         return False
     try:
-        put(archive_path, "/tmp/")
         file_name = archive_path.split("/")[-1].split(".")[0]
+        put('archive_path', '/tmp')
         run(f"mkdir -p /data/web_static/releases/{file_name}")
         run(f"tar -xzvf /tmp/{file_name}.tgz -C /data/web_static/releases/{file_name}/")
-        run(f'sudo rm -rf /tmp/{file_name}.tgz')
-        run('sudo rm -rf /data/web_static/current')
-        run(f'sudo ln -sf /data/web_static/releases/{file_name}/* /data/web_static/current')
+        run(f'rm -rf /tmp/{file_name}.tgz')
+        run('rm -rf /data/web_static/current')
+        run(f'ln -sf /data/web_static/releases/{file_name} /data/web_static/current')
+        print('New version deployed!')
         return True
     except Exception:
         return False
