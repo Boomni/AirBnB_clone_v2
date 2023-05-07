@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-script that distributes archive to webservers
+Script that distributes archive to webservers
 """
 import os.path import exists
 from fabric.api import env, run, put, sudo
@@ -21,7 +21,7 @@ def do_deploy(archive_path):
         run(f"tar -xzf /tmp/{file_name}.tgz -C {file_folder}")
         run(f'rm /tmp/{file_name}.tgz')
         run(f'mv {file_folder}/web_static/* {file_folder}')
-        run('rm -rf {file_folder}/web_static')
+        run(f'rm -rf {file_folder}/web_static')
         run('rm -rf /data/web_static/current')
         run(f'ln -s {file_folder}/ /data/web_static/current')
         print('New version deployed!')
