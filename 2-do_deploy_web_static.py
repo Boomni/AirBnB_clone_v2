@@ -1,15 +1,16 @@
 #!/usr/bin/python3
 """
-Fabric script to deploy tgz archive to webservers
+script that distributes archive to webservers
 """
-from os.path import exists
-from fabric.api import env, run, put, local, sudo
+import os.path import exists
+from fabric.api import env, run, put, sudo
 
 env.hosts = ['54.237.112.44', '35.175.63.68']
 
 
 def do_deploy(archive_path):
     """Copies archive file from local to my webservers"""
+
     if not exists(archive_path):
         return False
     try:
