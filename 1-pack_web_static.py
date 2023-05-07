@@ -13,11 +13,10 @@ def do_pack():
     making an archive on web_static folder
     """
 
-    time = datetime.now()
-    archive = 'web_static_' + time.strftime("%Y%m%d%H%M%S") + '.' + 'tgz'
+    time = datetime.now().strftime('%Y%m%d%H%M%S')
+    archive_path = 'versions/web_static_' + time + '.tgz'
     local('mkdir -p versions')
-    create = local(f'tar -cvzf versions/{archive} web_static')
-    if create is not None:
-        return archive
-    else:
-        return None
+    create = local(f'tar -cvzf {archive_path} web_static/')
+    if create:
+        return archive_path
+    return None
