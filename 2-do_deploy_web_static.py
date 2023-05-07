@@ -8,7 +8,7 @@ env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
-    """ 
+    """
     Distributes a .tgz archive from the contents of `web_static/` in AirBnB
     clone repo to the web servers
     Retuns:
