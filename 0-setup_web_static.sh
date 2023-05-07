@@ -8,25 +8,22 @@ fi
 
 sudo mkdir -p /data/web_static/releases/test/ /data/web_static/shared/
 
-sudo echo "
+echo "
 <html>
   <head>
   </head>
   <body>
-    Holberton School
+    ALX School
   </body>
 </html>
 " | sudo tee /data/web_static/releases/test/index.html
 
-File=/data/web_static/current
-if [ -f "$File" ]; then
-	sudo rm "$File";
-fi
-
-sudo ln -sf /data/web_static/releases/test/* /data/web_static/current
+sudo ln -sf '/data/web_static/releases/test/' '/data/web_static/current'
 
 sudo chown -R ubuntu:ubuntu /data/
 
 sudo sed -i 's#server_name _;#server_name _;\n\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n#g' /etc/nginx/sites-available/default
+
+sudo ln -sf '/etc/nginx/sites-available/default' '/etc/nginx/sites-enabled/default'
 
 sudo service nginx restart
