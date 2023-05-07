@@ -3,7 +3,7 @@
 Fabric script to deploy tgz archive to webservers
 """
 from os.path import exists
-from fabric.api import run, put, local, sudo
+from fabric.api import env, run, put, local, sudo
 
 env.hosts = ['54.237.112.44', '35.175.63.68']
 
