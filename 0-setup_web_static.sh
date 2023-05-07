@@ -18,6 +18,11 @@ sudo echo "
 </html>
 " | sudo tee /data/web_static/releases/test/index.html
 
+File=/data/web_static/current
+if [ -f "$File" ]; then
+	sudo rm "$File";
+fi
+
 sudo ln -sf /data/web_static/releases/test/* /data/web_static/current
 
 sudo chown -R ubuntu:ubuntu /data/
