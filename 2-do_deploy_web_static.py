@@ -2,8 +2,8 @@
 """
 Script that distributes archive to webservers
 """
-import os.path import exists
-from fabric.api import env, run, put, sudo
+from os.path import exists
+from fabric.operations import env, run, put, sudo
 
 env.hosts = ['54.237.112.44', '35.175.63.68']
 
