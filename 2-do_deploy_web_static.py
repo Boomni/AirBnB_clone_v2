@@ -11,7 +11,10 @@ def do_deploy(archive_path):
     """
     Distributes a .tgz archive from the contents of `web_static/` in AirBnB
     clone repo to the web servers
-    Retuns:
+
+    Args:
+        archive_path: The path to my archive file
+    Returns:
         (bool): `True` if all operations successful, `False` otherwise
     """
     if not exists(archive_path) or archive_path is None:
