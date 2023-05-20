@@ -1,44 +1,31 @@
 #!/usr/bin/python3
-"""
-Starts Flask web app
-Routes:
-    /: display "Hello HBNB!"
-    /hbnb: display "HBNB"
-    /c/<text>: display "C <text>"
-    /python/<text>: display “Python <text>”
-        The default value of text is “is cool”
-"""
-from flask import Flask
 
+from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def hbnb_route():
-    """prints Hello HBNB"""
+@app.route('/')
+def index():
     return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route('/hbnb')
 def hbnb():
-    """prints HBNB"""
     return "HBNB"
 
 
-@app.route('/c/<string:text>', strict_slashes=False)
-def c_text(text):
-    """Prints C followed by <text> content"""
-    text = text.replace("_", " ")
-    return f"C %s" % text
+@app.route('/c/<string:s>')
+def c(s):
+    new_s = s.replace("_", " ")
+    return "C {}".format(new_s)
 
 
-@app.route("/python")
-@app.route("/python/<string:text>")
-def python_text(text="is cool"):
-    """ Display 'Python ', followed <text> content"""
-    text = text.replace("_", " ")
-    return "Python %s" % text
+@app.route('/python', strict_slashes=False)
+@app.route('/python/<string:s>')
+def python(s="is cool"):
+    new_s = s.replace("_", " ")
+    return "Python {}".format(new_s)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host='0.0.0.0')
