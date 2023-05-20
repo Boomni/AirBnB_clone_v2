@@ -5,7 +5,7 @@ Routes:
     /: display "Hello HBNB!"
     /hbnb: display "HBNB"
     /c/<text>: display "C <text>"
-    /python/(<text>): display “Python <text>”
+    /python/<text>: display “Python <text>”
         The default value of text is “is cool”
 """
 from flask import Flask
