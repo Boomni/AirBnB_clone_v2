@@ -29,11 +29,11 @@ class BaseModel:
                 elif k != '__class__':
                     setattr(self, k, kwargs[k])
             if storage_type == 'db':
-                if not hasattr(kwargs, 'id'):
+                if 'id' not in kwargs:
                     setattr(self, 'id', str(uuid.uuid4()))
-                if not hasattr(kwargs, 'created_at'):
+                if 'created_at' not in kwargs:
                     setattr(self, 'created_at', datetime.now())
-                if not hasattr(kwargs, 'updated_at'):
+                if 'updated_at' not in kwargs:
                     setattr(self, 'updated_at', datetime.now())
 
     def __str__(self):
