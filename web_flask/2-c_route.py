@@ -25,7 +25,7 @@ def c_text(text):
     Replaces underscore _ symbols with a space
     """
     text = text.replace("_", " ")
-    return f"C {text}"
+    return f'C {text}'
 
 
 if __name__ == '__main__':
