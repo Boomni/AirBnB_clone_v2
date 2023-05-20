@@ -29,7 +29,7 @@ def hbnb():
 def c_text(text):
     """Prints C followed by <text> content"""
     text = text.replace("_", " ")
-    return f"C {text}"
+    return f"C %s" % text
 
 
 @app.route("/python/")
@@ -37,7 +37,7 @@ def c_text(text):
 def python_text(text="is cool"):
     """ Display 'Python ', followed <text> content"""
     text = text.replace("_", " ")
-    return f"Python {text}"
+    return "Python %s" % text
 
 
 if __name__ == "__main__":
