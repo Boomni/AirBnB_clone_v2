@@ -29,18 +29,14 @@ def hbnb():
 def c_text(text):
     """Prints C followed by <text> content"""
     text = text.replace("_", " ")
-    return "C %s" % text
+    return f"C {text}"
 
 
 @app.route("/python/")
-@app.route("/python/<text>")
-def python(text="is cool"):
-    """
-    Display 'Python ', followed by the value of the text variable
-    Replaces underscore _ symbols with a space
-    """
-    if "_" in text:
-        text = text.replace("_", " ")
+@app.route("/python/<string:text>")
+def python_text(text="is cool"):
+    """ Display 'Python ', followed <text> content"""
+    text = text.replace("_", " ")
     return f"Python {text}"
 
 
