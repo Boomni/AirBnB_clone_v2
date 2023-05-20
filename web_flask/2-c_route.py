@@ -24,8 +24,7 @@ def c(text):
     Display “C” followed by the value of the text variable
     (replace underscore _ symbols with a space )
     """
-    if "_" in text:
-        text = text.replace("_", " ")
+    text = text.replace("_", " ")
     return f"C {text}"
 
 
