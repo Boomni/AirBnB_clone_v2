@@ -65,7 +65,7 @@ def number_odd_or_even(n):
     H1 tag: “Number: n is even|odd” inside the tag BODY
     """
     if isinstance(n, int):
-        page = "number_odd_or_even.html"
+        page = "6-number_odd_or_even.html"
         if ((n % 2) == 0):
             return render_template(page, number=n, divisibility="even")
         else:
