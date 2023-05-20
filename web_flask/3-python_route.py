@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """Starts Flask web app
 Routes:
-    / - display "Hello HBNB!"
-    /hbnb - display "HBNB"
-    /c/<text> - display "C <text>"
-    /python/<text> - display "Python is cool"
+    /: display "Hello HBNB!"
+    /hbnb: display "HBNB"
+    /c/<text>: display "C <text>"
+    /python/<text>: display "Python is cool" or "Python <text>"
 """
 from flask import Flask
 
@@ -27,7 +27,7 @@ def hbnb():
 def c_text(text):
     """prints C followed by <text> content"""
     text = text.replace("_", " ")
-    return "C %s" % text
+    return f"C {text}"
 
 
 @app.route('/python', strict_slashes=False)
@@ -35,7 +35,7 @@ def c_text(text):
 def python_text(text="is cool"):
     """prints Python is cool"""
     text = text.replace("_", " ")
-    return "Python %s" % text
+    return f"Python {text}"
 
 
 if __name__ == "__main__":
