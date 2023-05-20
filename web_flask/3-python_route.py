@@ -32,7 +32,7 @@ def c_text(text):
     return f"C %s" % text
 
 
-@app.route("/python/")
+@app.route("/python")
 @app.route("/python/<string:text>")
 def python_text(text="is cool"):
     """ Display 'Python ', followed <text> content"""
