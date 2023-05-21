@@ -43,7 +43,8 @@ class BaseModel:
 
     def to_dict(self):
         dictionary = self.__dict__.copy()
-        dictionary.update({'__class__': (str(type(self)).split('.')[-1]).split('\'')[0]})
+        dictionary.update({'__class__': (
+            str(type(self)).split('.')[-1]).split('\'')[0]})
         if self.created_at is not None:
             dictionary['created_at'] = self.created_at.isoformat()
         if self.updated_at is not None:
