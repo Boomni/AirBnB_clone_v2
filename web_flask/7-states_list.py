@@ -18,7 +18,8 @@ def teardown_session(exception=None):
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     states = storage.all(State).values()
-    return render_template('7-states_list.html', states=states)
+    sorted_states = sorted(states, key=lambda x: x.name)
+    return render_template('7-states_list.html', states=sorted_states)
 
 
 if __name__ == '__main__':
