@@ -2,6 +2,7 @@
 """Contains python script to start a flask application"""
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 @app.route("/states_list", strict_slashes=False)
 def states_list():
     """Returns a template with all the states in storage"""
-    states = storage.all("State").values()
+    states = storage.all(State).values()
     return render_template("7-states_list.html", states=states)
 
 
