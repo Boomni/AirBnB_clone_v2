@@ -1,5 +1,13 @@
 #!/usr/bin/python3
-"""Contains python script to start a flask application"""
+"""
+Contains python script to start a flask application
+
+The application listens on 0.0.0.0, port 5000
+Data is fetched from storage
+After each request the current SQLAlchemy Session is removed
+Routes:
+    /states_list: display a HTML page
+"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State
