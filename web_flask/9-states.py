@@ -1,16 +1,21 @@
 #!/usr/bin/python3
-"""Contains python script to start a flask application"""
+"""Contains a script that starts a flask application"""
 from flask import Flask, render_template
 from models import storage
 
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
-def states_list():
+@app.route("/states", strict_slashes=False)
+@app.route("/states/<id>", strict_slashes=False)
+def states(id=None):
     """Returns a template with all the states in storage"""
     states = storage.all("State").values()
-    return render_template("7-states_list.html", states=states)
+    if id is None:
+        return render_template("9-states.html", states=states)
+    else:
+        state = next((state for state in states if state.id == id), None)
+        return render_template("9-states.html", state=state)
 
 
 @app.teardown_appcontext
