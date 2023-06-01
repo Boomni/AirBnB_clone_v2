@@ -28,6 +28,9 @@ div.locations {
 	margin-right: 0;
 }
 div.amenities {
+	height: 100%;
+	width: 25%;
+	border-right: 1px solid #DDDDDD;
 	margin-right: auto;
 }
 h3.title {
@@ -57,6 +60,9 @@ ul.popover {
 	padding-left: 10%;
 	padding-top: 5%;
 	padding-bottom: 5%;
+	max-height: 300px;
+	overflow-y: scroll;
+	position: absolute;
 }
 .popover li {
 	list-style-type: none;

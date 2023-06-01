@@ -1,27 +1,45 @@
 #!/usr/bin/python3
-"""Contains a script that starts a flask application"""
-from flask import Flask, render_template
+"""
+Contains a script that starts a flask application
+
+The application listens on 0.0.0.0, port 5000
+Data is fetched from storage
+After each request the current SQLAlchemy Session is removed
+
+Routes:
+    /states: HTML page with a list of all State objects.
+    /states/<id>: HTML page displaying the given state with <id>.
+"""
 from models import storage
+from flask import Flask
+from flask import render_template
 from models.state import State
 
 app = Flask(__name__)
 
 
 @app.route("/states", strict_slashes=False)
+def states():
+    """Displays an HTML page with a list of all States.
+
+    States are sorted by name.
+    """
+    states = storage.all(State)
+    return render_template("9-states.html", state=states)
+
+
 @app.route("/states/<id>", strict_slashes=False)
-def states(id=None):
-    """Returns a template with all the states in storage"""
-    states = storage.all(State).values()
-    if id is None:
-        return render_template("9-states.html", states=states)
-    else:
-        state = next((state for state in states if state.id == id), None)
-        return render_template("9-states.html", state=state)
+def states_id(id):
+    """Displays an HTML page with info about <id>, if it exists."""
+    for state in storage.all(State).values():
+        if state.id == id:
+            return render_template("9-states.html", state=state)
+    return render_template("9-states.html")
 
 
 @app.teardown_appcontext
-def close_session(exception):
-    """Removes current session after each request"""
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 

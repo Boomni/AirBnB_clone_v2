@@ -1,5 +1,15 @@
 #!/usr/bin/python3
-"""Contains a script that starts a flask application"""
+"""
+Contains a script that starts a flask application
+
+The application listens on 0.0.0.0, port 5000
+Data is fetched from storage
+After each request the current SQLAlchemy Session is removed
+
+Routes:
+    /hbnb_filters: HTML page displaying a page like 6-index.html
+        which was done during the project 0x01. AirBnB clone - Web static
+"""
 from flask import Flask, render_template
 from models import storage
 from models.state import State

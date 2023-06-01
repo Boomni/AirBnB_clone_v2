@@ -45,9 +45,12 @@ h4.subtitle {
 	font-weight: 400;
 	font-size: 14px;
 }
+div.heading {
+	display: flex;
+}
 div.locations:hover .popover, div.amenities:hover .popover {
-    display: block;
-    position: relative;
+	display: flex;
+	flex-direction: column;
 }
 ul.popover {
 	display: none;
@@ -63,30 +66,29 @@ ul.popover {
 ul.popover li {
 	list-style-type: none;
 }
+section.places {
+	display: flex;
+	flex-direction: column;
+}
 section.places h1 {
 	text-align: left;
 	font-size: 30px;
 }
-section article {
+.articles {
 	width: 390px;
 	padding: 20px;
-	margin: 20px;
 	border: 1px solid #FF5A5F;
 	border-radius: 4px;
 	display:flex;
-	flex-flow: row wrap;
-	align-items: center;
-	justify-content: space-evenly;
+	margin: 20px 0px;
+	flex-direction: column;
 }
-div.articles {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
+
 .place_title {
 	font-size: 30px;
 	display: flex;
 	justify-content: center;
+	margin: 0px;
 }
 .price_by_night {
 	color: #FF5A5F;
@@ -98,7 +100,8 @@ div.articles {
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
-	align-items: center
+	align-items: center;
+	padding: 3px;
 }
 .information {
 	display: flex;
