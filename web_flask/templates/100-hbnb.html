@@ -44,8 +44,8 @@
 		</section>
 		<section class="places">
 			<h1>Places</h1>
-			{% for place in places | sort(attribute='name')%}
 			<div class="articles">
+			{% for place in places | sort(attribute='name')%}
 				<article>
 					<div class='heading'>
 					<h2 class="place_title">{{ place.name }}</h2>
